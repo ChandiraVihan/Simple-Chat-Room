@@ -4,8 +4,14 @@ from chat.models import Room, Message
 def home(request):
     return render(request, 'home.html')
 
-def room(request):
-    return render(request, 'room.html')
+def room(request, room):
+    username = request.GET.get('username')
+    room_details = Room.objects.get(name=room)
+    return render(request, 'room.html',{
+        'username': username,
+        'room': 'room',
+        'room_details': room_details
+    })
 
 def checkview(request):
     room = request.POST['room_name']
